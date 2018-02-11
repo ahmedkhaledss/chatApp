@@ -17,6 +17,9 @@
 		B0636530202DDE1D00946EE1 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B063652F202DDE1D00946EE1 /* SignInViewController.swift */; };
 		B0636532202DDE6F00946EE1 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0636531202DDE6F00946EE1 /* RegisterViewController.swift */; };
 		B0856B70202BC7CB003622AB /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B0856B6F202BC7CB003622AB /* GoogleService-Info.plist */; };
+		B0903932202FA74D002AA64F /* MessageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B0903930202FA74B002AA64F /* MessageCell.xib */; };
+		B0903933202FA74D002AA64F /* CustomMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0903931202FA74C002AA64F /* CustomMessageCell.swift */; };
+		B0E639892030304E00AE7E5D /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0E639882030304E00AE7E5D /* Message.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +37,9 @@
 		B063652F202DDE1D00946EE1 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		B0636531202DDE6F00946EE1 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		B0856B6F202BC7CB003622AB /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		B0903930202FA74B002AA64F /* MessageCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MessageCell.xib; sourceTree = "<group>"; };
+		B0903931202FA74C002AA64F /* CustomMessageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomMessageCell.swift; sourceTree = "<group>"; };
+		B0E639882030304E00AE7E5D /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,18 +84,53 @@
 		B0027E9E2026349000D4EA92 /* Chat */ = {
 			isa = PBXGroup;
 			children = (
-				B0027E9F2026349000D4EA92 /* AppDelegate.swift */,
-				B0027EA12026349000D4EA92 /* WelcomeViewController.swift */,
-				B0027EA32026349000D4EA92 /* Main.storyboard */,
+				B0E6398720302BEE00AE7E5D /* Model */,
+				B0903934202FA79C002AA64F /* View */,
+				B090392F202FA63D002AA64F /* Controller */,
 				B0027EA62026349000D4EA92 /* Assets.xcassets */,
-				B0027EA82026349000D4EA92 /* LaunchScreen.storyboard */,
 				B0027EAB2026349000D4EA92 /* Info.plist */,
 				B0856B6F202BC7CB003622AB /* GoogleService-Info.plist */,
+			);
+			path = Chat;
+			sourceTree = "<group>";
+		};
+		B090392F202FA63D002AA64F /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				B0027E9F2026349000D4EA92 /* AppDelegate.swift */,
+				B0027EA12026349000D4EA92 /* WelcomeViewController.swift */,
 				B063652F202DDE1D00946EE1 /* SignInViewController.swift */,
 				B0636531202DDE6F00946EE1 /* RegisterViewController.swift */,
 				B04F3C79202F1D3100775426 /* ChatViewController.swift */,
 			);
-			path = Chat;
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		B0903934202FA79C002AA64F /* View */ = {
+			isa = PBXGroup;
+			children = (
+				B0027EA82026349000D4EA92 /* LaunchScreen.storyboard */,
+				B0027EA32026349000D4EA92 /* Main.storyboard */,
+				B0903936202FA83D002AA64F /* Custom Cell */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		B0903936202FA83D002AA64F /* Custom Cell */ = {
+			isa = PBXGroup;
+			children = (
+				B0903930202FA74B002AA64F /* MessageCell.xib */,
+				B0903931202FA74C002AA64F /* CustomMessageCell.swift */,
+			);
+			path = "Custom Cell";
+			sourceTree = "<group>";
+		};
+		B0E6398720302BEE00AE7E5D /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				B0E639882030304E00AE7E5D /* Message.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		D3CA2FC097760346A057F375 /* Frameworks */ = {
@@ -162,6 +203,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B0903932202FA74D002AA64F /* MessageCell.xib in Resources */,
 				B0027EAA2026349000D4EA92 /* LaunchScreen.storyboard in Resources */,
 				B0856B70202BC7CB003622AB /* GoogleService-Info.plist in Resources */,
 				B0027EA72026349000D4EA92 /* Assets.xcassets in Resources */,
@@ -238,11 +280,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B0903933202FA74D002AA64F /* CustomMessageCell.swift in Sources */,
 				B0027EA22026349000D4EA92 /* WelcomeViewController.swift in Sources */,
 				B0027EA02026349000D4EA92 /* AppDelegate.swift in Sources */,
 				B0636530202DDE1D00946EE1 /* SignInViewController.swift in Sources */,
 				B04F3C7A202F1D3100775426 /* ChatViewController.swift in Sources */,
 				B0636532202DDE6F00946EE1 /* RegisterViewController.swift in Sources */,
+				B0E639892030304E00AE7E5D /* Message.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
