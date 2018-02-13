@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import SVProgressHUD
 
 class SignInViewController: UIViewController {
 
@@ -17,16 +18,20 @@ class SignInViewController: UIViewController {
     
     
     @IBAction func signinPressed(_ sender: Any) {
-        if let emailText = emailTextfield.text, !emailText.isEmpty, let passwordText = passwordTextfield.text, !passwordText.isEmpty {
 
+        if let emailText = emailTextfield.text, !emailText.isEmpty, let passwordText = passwordTextfield.text, !passwordText.isEmpty {
+            SVProgressHUD.show()
             Auth.auth().signIn(withEmail: emailText, password: passwordText) { (user, error) in
                 if let signInError = error {
+                    SVProgressHUD.dismiss()
                     let alertController : UIAlertController = UIAlertController(title: "Error", message: signInError.localizedDescription, preferredStyle: .alert)
                     let action : UIAlertAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
                     alertController.addAction(action)
                     self.present(alertController, animated: true, completion: nil)
                 }
                 else {
+
+                    SVProgressHUD.dismiss()
                     self.performSegue(withIdentifier: "fromSigninToChat", sender: self)
                 }
             }

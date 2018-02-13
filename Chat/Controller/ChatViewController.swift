@@ -10,6 +10,7 @@ import UIKit
 import Firebase
 
 class ChatViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate {
+    var messageArray : [Message] = [Message]()
     
     @IBOutlet weak var messageTableView: UITableView!
     
@@ -17,15 +18,45 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     @IBOutlet weak var heightConstraint: NSLayoutConstraint!
     
-
+    @IBOutlet weak var sendButton: UIButton!
+    
+    
+    @IBAction func sendPressed(_ sender: Any) {
+        messageTextfield.endEditing(true)
+        messageTextfield.isEnabled = false
+        sendButton.isEnabled = false
+        
+        let messagesDB = Database.database().reference().child("Messages")
+        let messageDictionary = ["Sender": Auth.auth().currentUser?.email, "MessageBody": messageTextfield.text]
+        messagesDB.childByAutoId().setValue(messageDictionary) {
+            (error, ref) in
+            if let saveError = error {
+                print(saveError)
+            }
+            else {
+                print("Message sent Successfully")
+                self.messageTextfield.text = ""
+            }
+        }
+        messageTextfield.isEnabled = true
+        sendButton.isEnabled = true
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        return messageArray.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "customMessageCell", for: indexPath) as! CustomMessageCell
-        let messageArray = ["first message", "second message", "third message"]
-        cell.messageBody.text = messageArray[indexPath.row]
+        cell.messageBody.text = messageArray[indexPath.row].messageBody
+        cell.senderUsername.text = messageArray[indexPath.row].sender
+        cell.avatarImageView.image = UIImage(named: "avatar")
+        if cell.senderUsername.text == Auth.auth().currentUser?.email {
+            cell.messageBackground.backgroundColor = UIColor.blue
+        }
+        else {
+            cell.messageBackground.backgroundColor = UIColor.red
+        }
         return cell
         
     }
@@ -44,6 +75,7 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         let tabGesture = UITapGestureRecognizer(target: self, action: #selector(endMessageEditing))
         messageTableView.addGestureRecognizer(tabGesture)
+        retrieveMessages()
     }
     
     @IBAction func signoutPressed(_ sender: Any) {
@@ -81,9 +113,36 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
 
+    func retrieveMessages() {
+        let MessagesDB = Database.database().reference().child("Messages")
+        MessagesDB.observe(.childAdded) { (snapshot) in
+            let snapshotValue = snapshot.value as! Dictionary <String, String>
+            let text = snapshotValue["MessageBody"]
+            let sender = snapshotValue["Sender"]
+            let message = Message()
+            message.messageBody = text!
+            message.sender = sender!
+            self.messageArray.append(message)
+            self.messageTableView.reloadData()
+            self.scrollToBottom()
+        }
+    }
+    
     @objc func endMessageEditing() {
     messageTextfield.endEditing(true)
     }
+    
+    
+    
+    func scrollToBottom() {
+        DispatchQueue.main.async {
+            let indexPath = IndexPath(row: self.messageArray.count-1, section:0)
+            self.messageTableView.scrollToRow(at: indexPath, at: .bottom, animated: true)
+        }
+    }
+    
+    
+    
     /*
     // MARK: - Navigation
 

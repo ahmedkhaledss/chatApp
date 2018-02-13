@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import SVProgressHUD
 
 class RegisterViewController: UIViewController {
     
@@ -23,9 +24,11 @@ class RegisterViewController: UIViewController {
 
     @IBAction func registerPressed(_ sender: Any) {
         if let emailText = emailTextfield.text, !emailText.isEmpty, let passwordText = passwordTextfield.text, !passwordText.isEmpty {
+            SVProgressHUD.show()
             Auth.auth().createUser(withEmail: emailText, password: passwordTextfield.text!) { (user, error) in
                 if let registerError = error {
-                    //print(error!.localizedDescription)
+                    
+                    SVProgressHUD.dismiss()
                     let alertController : UIAlertController = UIAlertController(title: "Error", message: registerError.localizedDescription, preferredStyle: .alert)
                     let action : UIAlertAction = UIAlertAction(title: "Got it", style: .default, handler: nil)
                     alertController.addAction(action)
@@ -33,6 +36,7 @@ class RegisterViewController: UIViewController {
 
                 }
                 else {
+                    SVProgressHUD.dismiss()
                     self.performSegue(withIdentifier: "fromRegisterToChat", sender: self)
                 }
                 

@@ -48,9 +48,29 @@
                                     <constraint firstAttribute="height" constant="97" id="7t8-OP-sOt"/>
                                 </constraints>
                             </stackView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="kAw-2O-FGD">
+                                <rect key="frame" x="147.5" y="284" width="80" height="100.5"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="chat" translatesAutoresizingMaskIntoConstraints="NO" id="CCw-tZ-CpP">
+                                        <rect key="frame" x="0.0" y="0.0" width="80" height="80"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="80" id="Dxx-os-6Tj"/>
+                                            <constraint firstAttribute="width" constant="80" id="l1E-iC-HB1"/>
+                                        </constraints>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Chat App" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Vl-Ms-Co7">
+                                        <rect key="frame" x="0.0" y="80" width="80" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="italicSystem" pointSize="17"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" red="0.016804177310000001" green="0.19835099580000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="kAw-2O-FGD" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="KJS-Qd-ivt"/>
+                            <constraint firstItem="kAw-2O-FGD" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="LPh-pU-AuK"/>
                             <constraint firstItem="s7P-ly-r5E" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="10" id="eiZ-lP-b9R"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="s7P-ly-r5E" secondAttribute="trailing" constant="10" id="p5g-Uo-iTk"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="s7P-ly-r5E" secondAttribute="bottom" constant="10" id="thv-Ep-CE2"/>
@@ -147,6 +167,9 @@
                                         <state key="normal" title="Send">
                                             <color key="titleColor" red="0.016804177310000001" green="0.19835099580000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
+                                        <connections>
+                                            <action selector="sendPressed:" destination="IrI-Ku-D14" eventType="touchUpInside" id="xIg-7r-nNt"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -159,7 +182,7 @@
                                     <constraint firstItem="ukl-ZG-q3y" firstAttribute="leading" secondItem="v7N-Yl-7am" secondAttribute="trailing" constant="5" id="sKI-WI-vFa"/>
                                 </constraints>
                             </view>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="hag-6b-9bJ">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="hag-6b-9bJ">
                                 <rect key="frame" x="0.0" y="64" width="375" height="543"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
@@ -167,7 +190,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="SRL-3z-4IM" id="eN2-rk-7ZS">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -197,6 +220,7 @@
                         <outlet property="heightConstraint" destination="Wmh-eZ-6Qz" id="0Oz-H6-UnL"/>
                         <outlet property="messageTableView" destination="hag-6b-9bJ" id="xv0-Vs-ztW"/>
                         <outlet property="messageTextfield" destination="v7N-Yl-7am" id="4qa-d5-K2O"/>
+                        <outlet property="sendButton" destination="ukl-ZG-q3y" id="5FR-7t-830"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0IH-UB-oWW" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -275,6 +299,9 @@
             <point key="canvasLocation" x="-500" y="96"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="chat" width="341" height="341"/>
+    </resources>
     <inferredMetricsTieBreakers>
         <segue reference="mJs-mK-Nul"/>
     </inferredMetricsTieBreakers>
