@@ -52,10 +52,12 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
         cell.senderUsername.text = messageArray[indexPath.row].sender
         cell.avatarImageView.image = UIImage(named: "avatar")
         if cell.senderUsername.text == Auth.auth().currentUser?.email {
-            cell.messageBackground.backgroundColor = UIColor.blue
+            cell.messageBackground.backgroundColor = UIColor.init(red: 0, green: 0.4, blue: 0, alpha: 1)
+            cell.avatarImageView.backgroundColor = UIColor.init(red: 0, green: 1, blue: 0, alpha : 0.6)
         }
         else {
-            cell.messageBackground.backgroundColor = UIColor.red
+            cell.messageBackground.backgroundColor = UIColor.init(red: 0.4, green: 0, blue: 0, alpha: 1)
+            cell.avatarImageView.backgroundColor = UIColor.init(red: 1, green: 0, blue: 0, alpha : 0.6)
         }
         return cell
         
