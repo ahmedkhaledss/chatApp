@@ -10,7 +10,7 @@ import UIKit
 import Firebase
 import SVProgressHUD
 
-class RegisterViewController: UIViewController {
+class RegisterViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var emailTextfield: UITextField!
     
@@ -20,9 +20,20 @@ class RegisterViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         self.title = "Register"
+        emailTextfield.delegate = self
+        passwordTextfield.delegate = self
+
     }
 
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        view.endEditing(true)
+    }
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.endEditing(true)
+        return true
+    }
     @IBAction func registerPressed(_ sender: Any) {
+        view.endEditing(true)
         if let emailText = emailTextfield.text, !emailText.isEmpty, let passwordText = passwordTextfield.text, !passwordText.isEmpty {
             SVProgressHUD.show()
             Auth.auth().createUser(withEmail: emailText, password: passwordTextfield.text!) { (user, error) in
@@ -50,6 +61,7 @@ class RegisterViewController: UIViewController {
         }
 
 
+
     }
     
     override func didReceiveMemoryWarning() {
@@ -57,7 +69,6 @@ class RegisterViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
     /*
     // MARK: - Navigation
 

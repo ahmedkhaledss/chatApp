@@ -10,7 +10,7 @@ import UIKit
 import Firebase
 import SVProgressHUD
 
-class SignInViewController: UIViewController {
+class SignInViewController: UIViewController, UITextFieldDelegate {
 
     @IBOutlet weak var emailTextfield: UITextField!
     
@@ -19,6 +19,7 @@ class SignInViewController: UIViewController {
     
     @IBAction func signinPressed(_ sender: Any) {
 
+        view.endEditing(true)
         if let emailText = emailTextfield.text, !emailText.isEmpty, let passwordText = passwordTextfield.text, !passwordText.isEmpty {
             SVProgressHUD.show()
             Auth.auth().signIn(withEmail: emailText, password: passwordText) { (user, error) in
@@ -50,8 +51,17 @@ class SignInViewController: UIViewController {
         // Do any additional setup after loading the view.
 
         self.title = "Sign In"
+        emailTextfield.delegate = self
+        passwordTextfield.delegate = self
     }
 
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        view.endEditing(true)
+    }
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.endEditing(true)
+        return true
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

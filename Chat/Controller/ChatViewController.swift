@@ -134,6 +134,10 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
     messageTextfield.endEditing(true)
     }
     
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.endEditing(true)
+        return true
+    }
     
     
     func scrollToBottom() {
